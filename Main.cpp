@@ -1,8 +1,8 @@
 /*
-*	ÀÛ¼ºÀÚ : Oh YongSeok
-*	³¯  Â¥ : 2017.05.02
-*	¼³  ¸í : µµ³­¹æÁö ½Ã½ºÅÛ
-*   ÀÌ¸ŞÀÏ : ysoh1113@gmail.com
+*	ì‘ì„±ì : Oh YongSeok
+*	ë‚   ì§œ : 2017.05.02
+*	ì„¤  ëª… : ë„ë‚œë°©ì§€ ì‹œìŠ¤í…œ
+*   ì´ë©”ì¼ : ysoh1113@gmail.com
 */
 #include <iostream>
 #include <Windows.h>
@@ -15,24 +15,24 @@ using namespace std;
 double compareImg(cv::Mat img1, cv::Mat img2);
 int main()
 {
-	//1 Ä«¸Ş¶ó ÃÊ±âÈ­
+	//1 ì¹´ë©”ë¼ ì´ˆê¸°í™”
 	ofstream fout("output.txt");
-	cv::VideoCapture camera;	// ÀåºñÀÇ Ä«¸Ş¶ó¸¦ »ç¿ëÇÏ±âÀ§ÇÑ °´Ã¼ »ı¼º
-	camera.open(0);				// ÀåºñÀÇ 0¹øÄ«¸Ş¶ó (·¦Å¾ÀÇ °æ¿ì À¥Ä·) »ç¿ë
+	cv::VideoCapture camera;	// ì¥ë¹„ì˜ ì¹´ë©”ë¼ë¥¼ ì‚¬ìš©í•˜ê¸°ìœ„í•œ ê°ì²´ ìƒì„±
+	camera.open(0);				// ì¥ë¹„ì˜ 0ë²ˆì¹´ë©”ë¼ (ë©íƒ‘ì˜ ê²½ìš° ì›¹ìº ) ì‚¬ìš©
 	
-	if (!camera.isOpened())		// Ä«¸Ş¶ó°¡ Á¤»óÀûÀ¸·Î ¿­¸®Áö ¾ÊÀº°æ¿ì ¿¹¿Ü Ã³¸®
+	if (!camera.isOpened())		// ì¹´ë©”ë¼ê°€ ì •ìƒì ìœ¼ë¡œ ì—´ë¦¬ì§€ ì•Šì€ê²½ìš° ì˜ˆì™¸ ì²˜ë¦¬
 	{
 		printf("Camera not found!\n");
 		return -1;
 	}
-	cv::namedWindow("Camera", CV_WINDOW_AUTOSIZE);	// Ä«¸Ş¶óÀÇ ¿µ»óÀ» ½Ç½Ã°£À¸·Î Ãâ·ÂÇÒ À©µµ¿ì »ı¼º
+	cv::namedWindow("Camera", CV_WINDOW_AUTOSIZE);	// ì¹´ë©”ë¼ì˜ ì˜ìƒì„ ì‹¤ì‹œê°„ìœ¼ë¡œ ì¶œë ¥í•  ìœˆë„ìš° ìƒì„±
 	//cv::namedWindow("Object", CV_WINDOW_AUTOSIZE);
 	
-	//1 ³¡
+	//1 ë
 	
 	//2 Image Detection
-	cv::Mat frame;			// Ä«¸Ş¶ó¿¡¼­ ¹Ş¾Æ¿Ã ¿µ»óÀ» ´ãÀ» º¯¼ö
-	cv::Mat back_frame;		// °»½ÅÁ÷Àü ÀÌ¹ÌÁö ÀúÀåº¯¼ö
+	cv::Mat frame;			// ì¹´ë©”ë¼ì—ì„œ ë°›ì•„ì˜¬ ì˜ìƒì„ ë‹´ì„ ë³€ìˆ˜
+	cv::Mat back_frame;		// ê°±ì‹ ì§ì „ ì´ë¯¸ì§€ ì €ì¥ë³€ìˆ˜
 	cv::Mat save_frame;
 	
 	ObjTrack tracker;
@@ -44,10 +44,10 @@ int main()
 	while (true)
 	{
 		//2. Image Read
-		back_frame = frame.clone();	//Á÷Àü ÀÌ¹ÌÁö.
-		camera.read(frame);		// Ä«¸Ş¶ó¿¡¼­ ÇöÀç ¿µ»óÀ» ¹Ş¾Æ frame º¯¼ö¿¡ ÀúÀå
+		back_frame = frame.clone();	//ì§ì „ ì´ë¯¸ì§€.
+		camera.read(frame);		// ì¹´ë©”ë¼ì—ì„œ í˜„ì¬ ì˜ìƒì„ ë°›ì•„ frame ë³€ìˆ˜ì— ì €ì¥
 		//camera.read(save_frame);
-		if (frame.empty())		// Ä«¸Ş¶ó°¡ ºñÁ¤»ó ÀÛµ¿ ½Ã ¿¹¿Ü Ã³¸®
+		if (frame.empty())		// ì¹´ë©”ë¼ê°€ ë¹„ì •ìƒ ì‘ë™ ì‹œ ì˜ˆì™¸ ì²˜ë¦¬
 		{
 			continue;
 		}
@@ -59,8 +59,8 @@ int main()
 		//2. end
 
 		//3 object Detection
-		//¿§Áö Å½Áö.
-		cv::flip(frame, frame, 1);	// Ä«¸Ş¶ó¿¡¼­ ¹Ş¾Æ¿Â ¿µ»óÀº ¹İÀüµÇ¾î µé¾î¿À±â ¶§¹®¿¡ ¹İÀü½ÃÄÑÁÜ.
+		//ì—£ì§€ íƒì§€.
+		cv::flip(frame, frame, 1);	// ì¹´ë©”ë¼ì—ì„œ ë°›ì•„ì˜¨ ì˜ìƒì€ ë°˜ì „ë˜ì–´ ë“¤ì–´ì˜¤ê¸° ë•Œë¬¸ì— ë°˜ì „ì‹œì¼œì¤Œ.
 		tracker = ObjTrack();
 		tracker.setImg(frame.clone());
 
@@ -69,7 +69,7 @@ int main()
 
 		tracker.sharp();
 		tracker.blur(3);
-		tracker.findContours(); //À±°û¼± °ËÃâ
+		tracker.findContours(); //ìœ¤ê³½ì„  ê²€ì¶œ
 		tracker.findObject();
 
 		manager.setObject(tracker.getObject());
@@ -100,9 +100,9 @@ int main()
 	while (true)
 	{
 		back_frame = frame.clone();
-		camera.read(frame);		// Ä«¸Ş¶ó¿¡¼­ ÇöÀç ¿µ»óÀ» ¹Ş¾Æ frame º¯¼ö¿¡ ÀúÀå
+		camera.read(frame);		// ì¹´ë©”ë¼ì—ì„œ í˜„ì¬ ì˜ìƒì„ ë°›ì•„ frame ë³€ìˆ˜ì— ì €ì¥
 
-		if (frame.empty())		// Ä«¸Ş¶ó°¡ ºñÁ¤»ó ÀÛµ¿ ½Ã ¿¹¿Ü Ã³¸®
+		if (frame.empty())		// ì¹´ë©”ë¼ê°€ ë¹„ì •ìƒ ì‘ë™ ì‹œ ì˜ˆì™¸ ì²˜ë¦¬
 		{
 			continue;
 		}
@@ -112,7 +112,7 @@ int main()
 			continue;
 		}
 
-		cv::flip(frame, frame, 1);	// Ä«¸Ş¶ó¿¡¼­ ¹Ş¾Æ¿Â ¿µ»óÀ» ¹İÀü½ÃÅ´
+		cv::flip(frame, frame, 1);	// ì¹´ë©”ë¼ì—ì„œ ë°›ì•„ì˜¨ ì˜ìƒì„ ë°˜ì „ì‹œí‚´
 		tracker = ObjTrack();
 		tracker.setImg(frame.clone());
 
@@ -149,12 +149,12 @@ int main()
 	//3 end
 }
 
-//ÀÌ¹ÌÁöºñ±³(ÀÌ¹ÌÁö1, ÀÌ¹ÌÁö2)
+//ì´ë¯¸ì§€ë¹„êµ(ì´ë¯¸ì§€1, ì´ë¯¸ì§€2)
 double compareImg(cv::Mat img1, cv::Mat img2)
 {
-	//°´Ã¼»ı¼º
-	cv::Mat img1_gray, img2_gray;//ÀÌ¹ÌÁö¿¡´ëÇÑ È÷½ºÅä±×·¥°ªÀÌ ÀúÀåµÉ °´Ã¼.
-	//±×·¹ÀÌ½ºÄÉÀÏ
+	//ê°ì²´ìƒì„±
+	cv::Mat img1_gray, img2_gray;//ì´ë¯¸ì§€ì—ëŒ€í•œ íˆìŠ¤í† ê·¸ë¨ê°’ì´ ì €ì¥ë  ê°ì²´.
+	//ê·¸ë ˆì´ìŠ¤ì¼€ì¼
 	cv::cvtColor(img1, img1_gray, CV_BGR2GRAY);
 	cv::cvtColor(img2, img2_gray, CV_BGR2GRAY);
 
@@ -164,7 +164,7 @@ double compareImg(cv::Mat img1, cv::Mat img2)
 	bool uniform = true;
 	bool accumulate = false;
 	cv::Mat a1_hist, a2_hist;
-	//ÀÌÀÛ¾÷À» histogram¿¡ ³Ö°í °á°ú°ªÀ» callbackparam¿¡ ³Ö¾î¾ßÇÔ. ÀÌ°ÍÀº ÀÌ¹ÌÁö ÀüÃ¼¿¡´ëÇÑ°ÍÀÌ¹Ç·Î. °ü½É¿µ¿ª(ROI)·Î ¹Ù²ã¾ßÇÔ.
+	
 	cv::calcHist(&img1_gray, 1, 0, cv::Mat(), a1_hist, 1, &histSize, &histRange, uniform, accumulate);
 	cv::calcHist(&img2_gray, 1, 0, cv::Mat(), a2_hist, 1, &histSize, &histRange, uniform, accumulate);
 
