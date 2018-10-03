@@ -30,15 +30,13 @@ int main()
 	
 	//1 끝
 	
-	//2 Image Detection
+	//2 Image Detection Process
 	cv::Mat frame;			// 카메라에서 받아올 영상을 담을 변수
 	cv::Mat back_frame;		// 갱신직전 이미지 저장변수
-	cv::Mat save_frame;
-	
+		
 	ObjTrack tracker;
 	objectManager manager;
 	TrackManager trackManager;
-	//Sleep(1000);
 	camera.read(frame);
 
 	while (true)
@@ -46,7 +44,6 @@ int main()
 		//2. Image Read
 		back_frame = frame.clone();	//직전 이미지.
 		camera.read(frame);		// 카메라에서 현재 영상을 받아 frame 변수에 저장
-		//camera.read(save_frame);
 		if (frame.empty())		// 카메라가 비정상 작동 시 예외 처리
 		{
 			continue;
@@ -74,7 +71,6 @@ int main()
 
 		manager.setObject(tracker.getObject());
 		manager.drawObject(frame);
-		//cv::imshow("Camera", test);
 
 		imshow("Camera", frame);
 		//3 end
@@ -89,14 +85,12 @@ int main()
 			}
 			fout << "compare(CV_COMP_CORREL): " << com << endl;
 			break;
-		}
-
-		//cv::Mat test = tracker.print_findContours();
+		}		
 		
 	}
-	//2 function end
+	//2 Image Detection Process end
 	
-	//3 Thef Detecting function
+	//3 Thef Detecting Process
 	while (true)
 	{
 		back_frame = frame.clone();
@@ -146,7 +140,7 @@ int main()
 			break;
 		}
 	}
-	//3 end
+	//3 Process end
 }
 
 //이미지비교(이미지1, 이미지2)
