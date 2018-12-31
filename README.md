@@ -32,3 +32,6 @@
 라즈베리파이에 가상기계를 탑재해 물체탐지시스템이 가상기계에서 동작하도록 만들었습니다. 
 
 VisionAPIImpl.h, VisionAPIImpl.cpp파일은 가상기계에서 OpenCV라이브러리를 지원하지 않아 이를 해결하기 위해 직접 탑재하여 사용하는 파일입니다.
+
+# 시연영상
+http://ysoh1113.tistory.com/6
